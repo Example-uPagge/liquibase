@@ -12,6 +12,7 @@
             <column name="telegram_id" type="int">
                 <constraints unique="true"/>
             </column>
+            <column name="address" type="varchar(300)"/>
         </createTable>
     </changeSet>
 
