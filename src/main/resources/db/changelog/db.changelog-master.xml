@@ -27,10 +27,12 @@
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="name" type="varchar(64)"/>
-            <column name="author_id" type="int">
-                <constraints foreignKeyName="book_author_id_person_id" references="person(id)" deleteCascade="true"/>
-            </column>
+            <column name="author_id" type="int"/>
         </createTable>
+
+        <addForeignKeyConstraint baseTableName="book" baseColumnNames="author_id"
+                                 constraintName="book_author_id_person_id"
+                                 referencedTableName="person" referencedColumnNames="id" onUpdate="CASCADE"/>
     </changeSet>
 
 </databaseChangeLog>
