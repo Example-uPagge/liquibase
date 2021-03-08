@@ -5,4 +5,4 @@ spring:
     driver-class-name: org.postgresql.Driver
     password: 121314Ma
   liquibase:
-    change-log: classpath:db/changelog/db.changelog-master.xml
+    enabled: false
