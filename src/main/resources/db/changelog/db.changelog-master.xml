@@ -35,4 +35,15 @@
                                  referencedTableName="person" referencedColumnNames="id" onUpdate="CASCADE"/>
     </changeSet>
 
+    <changeSet id="create-view-book-author" author="uPagge">
+        <createView viewName="author_and_book">
+            SELECT p.id as person_id,
+                   p.name as person_name,
+                   b.id as book_id,
+                   b.name as book_name
+            FROM person p
+                     LEFT JOIN book b on p.id = b.author_id
+        </createView>
+    </changeSet>
+
 </databaseChangeLog>
