@@ -12,8 +12,13 @@
             <column name="telegram_id" type="int">
                 <constraints unique="true"/>
             </column>
-            <column name="address" type="varchar(300)"/>
         </createTable>
+    </changeSet>
+
+    <changeSet id="add-new-column-address" author="uPagge">
+        <addColumn tableName="person">
+            <column name="address" type="varchar(300)"/>
+        </addColumn>
     </changeSet>
 
 </databaseChangeLog>
