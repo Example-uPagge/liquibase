@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="create-table-person" author="uPagge">
+        <createTable tableName="person">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="first_name" type="varchar(64)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="add-new-column-address" author="uPagge">
+        <addColumn tableName="person">
+            <column name="address" type="varchar(300)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="create-table-book" author="uPagge">
+        <createTable tableName="book">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(64)"/>
+            <column name="author_id" type="int">
+                <constraints foreignKeyName="book_author_id_person_id" references="person(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

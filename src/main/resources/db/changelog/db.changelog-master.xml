@@ -1,49 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
 
-    <changeSet id="create-table-person" author="uPagge">
-        <createTable tableName="person">
-            <column name="id" type="int" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true"/>
-            </column>
-            <column name="name" type="varchar(64)"/>
-            <column name="telegram_id" type="int">
-                <constraints unique="true"/>
-            </column>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="add-new-column-address" author="uPagge">
-        <addColumn tableName="person">
-            <column name="address" type="varchar(300)"/>
-        </addColumn>
-    </changeSet>
-
-    <changeSet id="create-table-book" author="uPagge">
-        <createTable tableName="book">
-            <column name="id" type="int" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true"/>
-            </column>
-            <column name="name" type="varchar(64)"/>
-            <column name="author_id" type="int"/>
-        </createTable>
-
-        <addForeignKeyConstraint baseTableName="book" baseColumnNames="author_id"
-                                 constraintName="book_author_id_person_id"
-                                 referencedTableName="person" referencedColumnNames="id" onUpdate="CASCADE"/>
-    </changeSet>
-
-    <changeSet id="create-view-book-author" author="uPagge">
-        <createView viewName="author_and_book">
-            SELECT p.id as person_id,
-                   p.name as person_name,
-                   b.id as book_id,
-                   b.name as book_name
-            FROM person p
-                     LEFT JOIN book b on p.id = b.author_id
-        </createView>
-    </changeSet>
+    <include file="v.1.0.0/cumulative-changelog.xml" relativeToChangelogFile="true"/>
+    <include file="v.2.0.0/cumulative-changelog.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

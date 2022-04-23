@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="create-table-hero" author="uPagge">
+        <createTable tableName="hero">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="book_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-fk" author="uPagge">
+        <addForeignKeyConstraint baseTableName="hero" baseColumnNames="book_id"
+                                 constraintName="hero_book_id"
+                                 referencedTableName="book" referencedColumnNames="id"
+                                 deleteCascade="true"/>
+    </changeSet>
+
+    <changeSet id="insert-into" author="uPagge">
+        <insert tableName="person">
+            <column name="first_name" value="Александр"/>
+        </insert>
+        <insert tableName="book">
+            <column name="name" value="Капитанская дочка"/>
+            <column name="author_id" value="1"/>
+        </insert>
+        <insert tableName="hero">
+            <column name="name" value="Савельич"/>
+            <column name="book_id" value="1"/>
+        </insert>
+
+        <rollback>
+            <delete tableName="hero">
+                <where>name = 'Савельич'</where>
+            </delete>
+            <delete tableName="book">
+                <where>name = 'Капитанская дочка'</where>
+            </delete>
+            <delete tableName="person">
+                <where>first_name = 'Александр'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
