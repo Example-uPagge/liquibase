@@ -31,4 +31,10 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="create-index-author-id" author="uPagge">
+        <createIndex indexName="idx_book_author_id" tableName="book">
+            <column name="author_id"/>
+        </createIndex>
+    </changeSet>
+
 </databaseChangeLog>
